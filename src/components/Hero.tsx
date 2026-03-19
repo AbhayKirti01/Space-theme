@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, MousePointer2 } from 'lucide-react';
+import { ArrowRight, MousePointer2, Hexagon } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const containerVariants: any = {
@@ -27,13 +27,27 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="max-w-5xl w-full text-center z-10"
+        className="max-w-5xl w-full text-center z-10 pb-32 md:pb-0"
       >
+        <motion.div 
+          variants={itemVariants} 
+          className="mb-8 flex justify-center"
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+          <a href="#home" className="group relative">
+            <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full group-hover:bg-primary/40 transition-all duration-500" />
+            <div className="relative glass p-4 rounded-2xl border border-white/10 group-hover:border-primary/50 transition-all duration-500">
+              <Hexagon size={32} className="text-primary group-hover:rotate-90 transition-transform duration-700" />
+            </div>
+          </a>
+        </motion.div>
+
         <motion.div variants={itemVariants} className="mb-4">
           <span className="px-4 py-2 rounded-full glass text-primary text-xs font-medium tracking-widest uppercase">
             Available for new projects
@@ -81,7 +95,7 @@ export const Hero: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30 z-20"
       >
         <span className="text-[10px] uppercase tracking-[0.3em]">Scroll to explore</span>
         <motion.div 

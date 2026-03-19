@@ -47,9 +47,11 @@ export const Navbar: React.FC = () => {
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
           className="text-2xl font-bold tracking-tighter"
         >
-          <Link to="/">AK<span className="text-primary">.</span></Link>
+          <a href="/#home">AK<span className="text-primary">.</span></a>
         </motion.div>
 
         {/* Desktop Nav */}
