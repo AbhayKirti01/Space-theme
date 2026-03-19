@@ -94,7 +94,7 @@ export const Navbar: React.FC = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden absolute top-full left-0 w-full bg-bg border-b border-white/10 overflow-hidden"
+            className="md:hidden absolute top-full left-0 w-full bg-bg border-b border-white/10 overflow-y-auto max-h-[calc(100vh-80px)]"
           >
             <div className="flex flex-col p-6 gap-4">
               {navLinks.map(link => (

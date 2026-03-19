@@ -5,16 +5,18 @@ import * as THREE from 'three';
 
 function Particles() {
   const ref = useRef<THREE.Points>(null!);
+  const [isMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
   
   const positions = useMemo(() => {
-    const pos = new Float32Array(5000 * 3);
-    for (let i = 0; i < 5000; i++) {
+    const count = isMobile ? 2000 : 5000;
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
       pos[i * 3] = (Math.random() - 0.5) * 20;
       pos[i * 3 + 1] = (Math.random() - 0.5) * 20;
       pos[i * 3 + 2] = (Math.random() - 0.5) * 20;
     }
     return pos;
-  }, []);
+  }, [isMobile]);
 
   useFrame((state, delta) => {
     ref.current.rotation.x += delta * 0.05;

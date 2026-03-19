@@ -27,7 +27,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+    <section id="home" className="relative min-h-screen min-h-[100dvh] flex items-center justify-center px-6 overflow-hidden">
       <motion.div
         variants={containerVariants}
         initial="hidden"
