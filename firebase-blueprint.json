@@ -1,0 +1,36 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "A portfolio project",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "The name of the project" },
+        "description": { "type": "string", "description": "A brief description of the project" },
+        "image": { "type": "string", "description": "URL of the project image" },
+        "tags": { "type": "array", "items": { "type": "string" }, "description": "Technologies used" },
+        "link": { "type": "string", "description": "Link to the project" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the project was added" }
+      },
+      "required": ["title", "description", "image", "tags"]
+    },
+    "Skill": {
+      "title": "Skill",
+      "description": "A professional skill category",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "The skill category name" },
+        "icon": { "type": "string", "description": "Lucide icon name" },
+        "skills": { "type": "array", "items": { "type": "string" }, "description": "List of specific skills" },
+        "color": { "type": "string", "description": "Tailwind color name (e.g., primary, secondary)" },
+        "image": { "type": "string", "description": "URL of an image representing this skill" },
+        "order": { "type": "number", "description": "Display order" }
+      },
+      "required": ["title", "icon", "skills", "color"]
+    }
+  },
+  "firestore": {
+    "/projects": { "schema": "Project", "description": "Collection of portfolio projects" },
+    "/skills": { "schema": "Skill", "description": "Collection of professional skills" }
+  }
+}
