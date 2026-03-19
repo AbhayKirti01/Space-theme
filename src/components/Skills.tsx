@@ -20,7 +20,7 @@ const SkillCard: React.FC<{
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay, duration: 0.5 }}
-      className="glass p-8 rounded-[2rem] relative overflow-hidden group hover:bg-white/10 transition-all duration-500"
+      className="glass p-6 md:p-8 rounded-[2rem] relative overflow-hidden group hover:bg-white/10 transition-all duration-500"
     >
       <div className={`absolute top-0 right-0 w-32 h-32 bg-${color}/10 blur-[60px] rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-${color}/20 transition-all`} />
       
@@ -35,13 +35,13 @@ const SkillCard: React.FC<{
           <Icon size={28} />
         </div>
         
-        <h3 className="text-2xl font-bold mb-4 tracking-tight">{title}</h3>
+        <h3 className="text-xl md:text-2xl font-bold mb-4 tracking-tight">{title}</h3>
         
         <div className="flex flex-wrap gap-2">
           {skills.map((skill, i) => (
             <span 
               key={i}
-              className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-white/60 hover:text-white hover:border-white/30 transition-all"
+              className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] md:text-xs font-medium text-white/60 hover:text-white hover:border-white/30 transition-all"
             >
               {skill}
             </span>
@@ -75,9 +75,9 @@ export const Skills: React.FC = () => {
   ];
 
   return (
-    <section id="skills" className="py-24 px-4 md:px-6 relative overflow-hidden">
+    <section id="skills" className="py-20 px-4 md:px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-8">
           <div className="max-w-2xl">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -91,7 +91,7 @@ export const Skills: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter"
+              className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tighter"
             >
               Core <span className="text-gradient">Skills.</span>
             </motion.h2>
@@ -100,13 +100,13 @@ export const Skills: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-white/40 max-w-md text-lg md:text-xl"
+            className="text-white/40 max-w-md text-base md:text-xl"
           >
             A multidisciplinary approach combining cutting-edge technology with financial market intelligence.
           </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {staticSkills.map((group, i) => (
             <SkillCard 
               key={i} 
@@ -120,7 +120,7 @@ export const Skills: React.FC = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="lg:col-span-3 glass p-12 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group mt-6"
+            className="lg:col-span-3 glass p-6 sm:p-12 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group mt-6"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-accent/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             

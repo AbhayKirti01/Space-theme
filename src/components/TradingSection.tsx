@@ -28,59 +28,61 @@ export const TradingSection: React.FC = () => {
   }, []);
 
   return (
-    <section id="trading" className="py-24 px-4 md:px-6 relative overflow-hidden">
+    <section id="trading" className="py-20 px-4 md:px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
           <motion.div
-            initial={{ x: -100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8 tracking-tighter">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 md:mb-8 tracking-tighter">
               Market <span className="text-primary">Analysis</span> & Trading
             </h2>
-            <p className="text-white/60 text-lg md:text-xl mb-10 leading-relaxed max-w-xl">
+            <p className="text-white/60 text-base md:text-xl mb-8 md:mb-10 leading-relaxed max-w-xl">
               Specialized in technical analysis and algorithmic trading strategies. 
               Bridging the gap between financial markets and technology through data-driven insights.
             </p>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-4 md:gap-6">
               {[
                 { icon: TrendingUp, label: "Forex", value: "+12.5%" },
                 { icon: Activity, label: "Crypto", value: "Bullish" },
                 { icon: BarChart3, label: "Gold", value: "Stable" },
                 { icon: Globe, label: "Global", value: "Active" },
               ].map((item, i) => (
-                <div key={i} className="glass p-6 rounded-2xl hover:bg-white/10 transition-colors group">
-                  <item.icon className="text-primary mb-4 group-hover:scale-110 transition-transform" size={24} />
-                  <div className="text-sm text-white/40 uppercase tracking-widest mb-1">{item.label}</div>
-                  <div className="text-xl font-bold">{item.value}</div>
+                <div key={i} className="glass p-4 md:p-6 rounded-2xl hover:bg-white/10 transition-colors group">
+                  <item.icon className="text-primary mb-3 md:mb-4 group-hover:scale-110 transition-transform" size={20} />
+                  <div className="text-[10px] text-white/40 uppercase tracking-widest mb-1">{item.label}</div>
+                  <div className="text-lg md:text-xl font-bold">{item.value}</div>
                 </div>
               ))}
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ x: 100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="glass p-4 md:p-8 rounded-3xl aspect-square md:aspect-video flex items-end justify-between gap-1 md:gap-2 overflow-hidden relative">
+            <div className="glass p-4 md:p-8 rounded-3xl aspect-[4/3] sm:aspect-video flex items-end justify-between gap-1 md:gap-2 overflow-hidden relative">
               <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
-              <div className="absolute top-4 left-4 md:top-8 md:left-8 flex items-center gap-4">
+              <div className="absolute top-4 left-4 md:top-8 md:left-8 flex items-center gap-3 md:gap-4">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                  <span className="text-[10px] md:text-xs font-medium uppercase tracking-widest text-white/60">Live Market</span>
+                  <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary animate-pulse" />
+                  <span className="text-[8px] md:text-xs font-medium uppercase tracking-widest text-white/60">Live Market</span>
                 </div>
-                <div className="text-xl md:text-2xl font-bold font-mono">$68,432.12</div>
+                <div className="text-lg md:text-2xl font-bold font-mono">$68,432.12</div>
               </div>
               
-              {chartData.map((data, i) => (
-                <Candlestick key={i} delay={i * 0.05} height={data.height} isUp={data.isUp} />
-              ))}
+              <div className="flex items-end justify-between w-full h-3/4 gap-1">
+                {chartData.map((data, i) => (
+                  <Candlestick key={i} delay={i * 0.05} height={data.height} isUp={data.isUp} />
+                ))}
+              </div>
             </div>
 
             {/* Decorative elements */}

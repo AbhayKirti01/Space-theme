@@ -56,7 +56,7 @@ export const Hero: React.FC = () => {
         
         <motion.h1 
           variants={itemVariants}
-          className="text-5xl sm:text-7xl md:text-9xl font-bold mb-6 leading-tight tracking-tighter"
+          className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-6 leading-tight tracking-tighter"
         >
           <span className="block">Abhay</span>
           <span className="text-gradient">Kirti</span>
@@ -64,19 +64,19 @@ export const Hero: React.FC = () => {
 
         <motion.p 
           variants={itemVariants}
-          className="text-lg md:text-2xl text-white/60 mb-10 max-w-2xl mx-auto font-light px-4"
+          className="text-base md:text-xl lg:text-2xl text-white/60 mb-10 max-w-2xl mx-auto font-light px-4"
         >
           Web Developer <span className="text-primary mx-2">|</span> 
           Graphic Designer <span className="text-accent mx-2">|</span> 
           Market Analyst
         </motion.p>
 
-        <motion.div variants={itemVariants} className="flex flex-col md:flex-row items-center justify-center gap-6">
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
           <a 
             href="#contact"
-            className="group relative px-8 py-4 bg-white text-black rounded-full font-semibold overflow-hidden transition-all hover:scale-105 active:scale-95 inline-block"
+            className="w-full sm:w-auto group relative px-8 py-4 bg-white text-black rounded-full font-semibold overflow-hidden transition-all hover:scale-105 active:scale-95 inline-block"
           >
-            <span className="relative z-10 flex items-center gap-2">
+            <span className="relative z-10 flex items-center justify-center gap-2">
               Hire Me <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </span>
             <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -84,7 +84,7 @@ export const Hero: React.FC = () => {
           
           <a 
             href="#contact"
-            className="px-8 py-4 glass rounded-full font-semibold hover:bg-white/10 transition-colors flex items-center gap-2"
+            className="w-full sm:w-auto px-8 py-4 glass rounded-full font-semibold hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
           >
             Let's Talk <MousePointer2 size={18} />
           </a>

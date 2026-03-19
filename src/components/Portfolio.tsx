@@ -43,14 +43,14 @@ export const Portfolio: React.FC = () => {
   );
 
   return (
-    <section id="projects" className="py-24 px-4 md:px-6 bg-white/2 relative">
+    <section id="projects" className="py-20 px-4 md:px-6 bg-white/2 relative">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-8">
           <div className="max-w-2xl">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 tracking-tighter">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 md:mb-6 tracking-tighter">
               Selected <span className="text-accent">Works.</span>
             </h2>
-            <p className="text-white/40 text-lg md:text-xl max-w-md">
+            <p className="text-white/40 text-base md:text-xl max-w-md">
               A collection of projects where technology meets creative expression.
             </p>
           </div>
@@ -61,7 +61,7 @@ export const Portfolio: React.FC = () => {
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={cn(
-                  "px-6 py-2 rounded-full text-sm font-medium transition-all",
+                  "px-4 md:px-6 py-2 rounded-full text-xs md:text-sm font-medium transition-all",
                   activeCategory === cat 
                     ? "bg-white text-black" 
                     : "glass text-white/60 hover:bg-white/10"
@@ -75,7 +75,7 @@ export const Portfolio: React.FC = () => {
 
         <motion.div 
           layout
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, i) => (
@@ -99,7 +99,7 @@ export const Portfolio: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent opacity-60" />
                 </div>
 
-                <div className="p-8">
+                <div className="p-6 md:p-8">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-[10px] uppercase tracking-widest text-primary font-bold px-2 py-1 rounded bg-primary/10">
                       {project.category || 'Web'}

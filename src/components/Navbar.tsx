@@ -17,12 +17,22 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '/#' },
-    { name: 'Projects', href: '/#projects' },
-    { name: 'Skills', href: '/#skills' },
-    { name: 'Trading', href: '/#trading' },
-    { name: 'Contact', href: '/#contact' },
+    { name: 'Home', href: '#home' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Trading', href: '#trading' },
+    { name: 'Contact', href: '#contact' },
   ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <nav className={cn(
@@ -37,7 +47,7 @@ export const Navbar: React.FC = () => {
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
           className="text-2xl font-bold tracking-tighter"
         >
-          <a href="/#home">AK<span className="text-primary">.</span></a>
+          <a href="#home" onClick={(e) => handleNavClick(e, '#home')}>AK<span className="text-primary">.</span></a>
         </motion.div>
 
         {/* Desktop Nav */}
@@ -46,6 +56,7 @@ export const Navbar: React.FC = () => {
             <motion.a
               key={link.name}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
@@ -57,7 +68,8 @@ export const Navbar: React.FC = () => {
           ))}
           
           <motion.a
-            href="/#contact"
+            href="#contact"
+            onClick={(e) => handleNavClick(e, '#contact')}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             className="px-6 py-2 bg-white text-black rounded-full text-sm font-bold hover:scale-105 transition-transform inline-block"
@@ -89,15 +101,15 @@ export const Navbar: React.FC = () => {
                 <a 
                   key={link.name} 
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="text-2xl font-bold hover:text-primary transition-colors"
                 >
                   {link.name}
                 </a>
               ))}
               <a 
-                href="/#contact"
-                onClick={() => setIsMobileMenuOpen(false)}
+                href="#contact"
+                onClick={(e) => handleNavClick(e, '#contact')}
                 className="w-full py-4 bg-white text-black rounded-2xl font-bold mt-4 text-center inline-block"
               >
                 Hire Me

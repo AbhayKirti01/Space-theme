@@ -44,16 +44,9 @@ const MainLayout: React.FC = () => {
       <main>
         <Hero />
         
-        <section id="projects">
-          <Portfolio />
-        </section>
-
+        <Portfolio />
         <Skills />
-
-        <section id="trading">
-          <TradingSection />
-        </section>
-
+        <TradingSection />
         <Contact />
       </main>
 
