@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 import * as LucideIcons from 'lucide-react';
-import { db, handleFirestoreError, OperationType } from '../firebase';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 
 const { Zap, Cpu, Globe2 } = LucideIcons;
 
@@ -55,9 +53,6 @@ const SkillCard: React.FC<{
 };
 
 export const Skills: React.FC = () => {
-  const [skillGroups, setSkillGroups] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
   const staticSkills = [
     {
       title: "AI & Innovation",
@@ -78,33 +73,6 @@ export const Skills: React.FC = () => {
       color: "accent",
     }
   ];
-
-  useEffect(() => {
-    const fetchSkills = async () => {
-      const path = 'skills';
-      try {
-        const q = query(collection(db, path), orderBy('order', 'asc'));
-        const querySnapshot = await getDocs(q);
-        const fetchedSkills = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        
-        if (fetchedSkills.length > 0) {
-          setSkillGroups(fetchedSkills);
-        } else {
-          setSkillGroups(staticSkills);
-        }
-      } catch (error) {
-        if (error instanceof Error && error.message.includes('permission')) {
-          handleFirestoreError(error, OperationType.GET, path);
-        }
-        console.error("Error fetching skills:", error);
-        setSkillGroups(staticSkills);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSkills();
-  }, []);
 
   return (
     <section id="skills" className="py-24 px-4 md:px-6 relative overflow-hidden">
@@ -139,9 +107,9 @@ export const Skills: React.FC = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skillGroups.map((group, i) => (
+          {staticSkills.map((group, i) => (
             <SkillCard 
-              key={group.id || i} 
+              key={i} 
               {...group} 
               delay={i * 0.1} 
             />

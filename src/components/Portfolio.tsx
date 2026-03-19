@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ExternalLink, Github } from 'lucide-react';
 import { cn } from '../utils/cn';
-import { db, handleFirestoreError, OperationType } from '../firebase';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 
 const categories = ['All', 'Web', 'Design', 'Trading'];
 
@@ -13,57 +11,34 @@ const staticProjects = [
     category: "Design",
     image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800&h=600",
     description: "A futuristic UI kit focused on glassmorphism and motion.",
-    tags: ["Figma", "Motion", "UI/UX"]
+    tags: ["Figma", "Motion", "UI/UX"],
+    link: "#",
+    github: "#"
   },
   {
     title: "Nebula Web Engine",
     category: "Web",
     image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800&h=600",
     description: "High-performance rendering engine for interactive web experiences.",
-    tags: ["TypeScript", "WebGL", "Vite"]
+    tags: ["TypeScript", "WebGL", "Vite"],
+    link: "#",
+    github: "#"
   },
   {
     title: "Crypto Pulse",
     category: "Trading",
     image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&q=80&w=800&h=600",
     description: "Market sentiment analysis tool for cryptocurrency traders.",
-    tags: ["Python", "React", "D3.js"]
+    tags: ["Python", "React", "D3.js"],
+    link: "#",
+    github: "#"
   }
 ];
 
 export const Portfolio: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('All');
-  const [projects, setProjects] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const path = 'projects';
-      try {
-        const q = query(collection(db, path), orderBy('createdAt', 'desc'));
-        const querySnapshot = await getDocs(q);
-        const fetchedProjects = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        
-        if (fetchedProjects.length > 0) {
-          setProjects(fetchedProjects);
-        } else {
-          setProjects(staticProjects);
-        }
-      } catch (error) {
-        if (error instanceof Error && error.message.includes('permission')) {
-          handleFirestoreError(error, OperationType.GET, path);
-        }
-        console.error("Error fetching projects:", error);
-        setProjects(staticProjects);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProjects();
-  }, []);
-
-  const filteredProjects = projects.filter(p => 
+  const filteredProjects = staticProjects.filter(p => 
     activeCategory === 'All' || p.category === activeCategory
   );
 
@@ -105,7 +80,7 @@ export const Portfolio: React.FC = () => {
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, i) => (
               <motion.div
-                key={project.id || project.title}
+                key={project.title}
                 layout
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}

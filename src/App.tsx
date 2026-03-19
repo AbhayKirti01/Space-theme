@@ -6,7 +6,6 @@ import { Portfolio } from './components/Portfolio';
 import { Skills } from './components/Skills';
 import { TradingSection } from './components/TradingSection';
 import { Contact } from './components/Contact';
-import { Admin } from './components/Admin';
 import { Scene3D } from './components/Scene3D';
 import { CursorFollower } from './components/CursorFollower';
 import { motion, useScroll, useSpring } from 'motion/react';
@@ -71,7 +70,6 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainLayout />} />
-        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );

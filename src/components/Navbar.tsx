@@ -1,30 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Settings } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '../utils/cn';
-import { Link, useLocation } from 'react-router-dom';
-import { auth } from '../firebase';
-import { onAuthStateChanged } from 'firebase/auth';
-
-const OWNER_EMAIL = "abhay.humane3@gmail.com";
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isOwner, setIsOwner] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsOwner(user?.email === OWNER_EMAIL);
-    });
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      unsubscribe();
     };
   }, []);
 
@@ -35,8 +23,6 @@ export const Navbar: React.FC = () => {
     { name: 'Trading', href: '/#trading' },
     { name: 'Contact', href: '/#contact' },
   ];
-
-  const isMainPage = location.pathname === '/';
 
   return (
     <nav className={cn(
@@ -70,21 +56,6 @@ export const Navbar: React.FC = () => {
             </motion.a>
           ))}
           
-          {isOwner && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-            >
-              <Link 
-                to="/admin" 
-                className="p-2 glass rounded-full text-white/40 hover:text-primary transition-colors flex items-center justify-center"
-                title="Admin Panel"
-              >
-                <Settings size={18} />
-              </Link>
-            </motion.div>
-          )}
-
           <motion.a
             href="/#contact"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -124,15 +95,6 @@ export const Navbar: React.FC = () => {
                   {link.name}
                 </a>
               ))}
-              {isOwner && (
-                <Link 
-                  to="/admin"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-2xl font-bold text-primary transition-colors flex items-center gap-2"
-                >
-                  <Settings size={24} /> Admin Panel
-                </Link>
-              )}
               <a 
                 href="/#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
