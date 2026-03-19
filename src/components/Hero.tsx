@@ -26,6 +26,21 @@ export const Hero: React.FC = () => {
     },
   };
 
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <section id="home" className="relative min-h-screen min-h-[100dvh] flex items-center justify-center px-6 overflow-hidden">
       <motion.div
@@ -40,7 +55,7 @@ export const Hero: React.FC = () => {
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
-          <a href="#home" className="group relative">
+          <a href="#home" onClick={(e) => handleScrollTo(e, 'home')} className="group relative">
             <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full group-hover:bg-primary/40 transition-all duration-500" />
             <div className="relative glass p-4 rounded-2xl border border-white/10 group-hover:border-primary/50 transition-all duration-500">
               <Hexagon size={32} className="text-primary group-hover:rotate-90 transition-transform duration-700" />
@@ -74,6 +89,7 @@ export const Hero: React.FC = () => {
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
           <a 
             href="#contact"
+            onClick={(e) => handleScrollTo(e, 'contact')}
             className="w-full sm:w-auto group relative px-8 py-4 bg-white text-black rounded-full font-semibold overflow-hidden transition-all hover:scale-105 active:scale-95 inline-block"
           >
             <span className="relative z-10 flex items-center justify-center gap-2">
@@ -84,6 +100,7 @@ export const Hero: React.FC = () => {
           
           <a 
             href="#contact"
+            onClick={(e) => handleScrollTo(e, 'contact')}
             className="w-full sm:w-auto px-8 py-4 glass rounded-full font-semibold hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
           >
             Let's Talk <MousePointer2 size={18} />

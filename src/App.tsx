@@ -19,8 +19,8 @@ const MainLayout: React.FC = () => {
   });
 
   useEffect(() => {
-    // Smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
+    // Ensure scroll position is reset on load
+    window.scrollTo(0, 0);
   }, []);
 
   return (

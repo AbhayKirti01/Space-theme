@@ -6,9 +6,26 @@ import { cn } from '../utils/cn';
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+
+      // Update active section based on scroll position
+      const sections = ['home', 'projects', 'skills', 'trading', 'contact'];
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // If section is in the upper part of the viewport
+          if (rect.top <= 150 && rect.bottom >= 150) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
     window.addEventListener('scroll', handleScroll);
     
     return () => {
@@ -27,11 +44,24 @@ export const Navbar: React.FC = () => {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    setActiveSection(targetId);
     setIsMobileMenuOpen(false);
+
+    const element = document.getElementById(targetId);
+    
+    if (element) {
+      // Small delay to allow mobile menu animation to start closing
+      setTimeout(() => {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }, 50);
+    }
   };
 
   return (
@@ -60,10 +90,14 @@ export const Navbar: React.FC = () => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="text-sm font-medium text-white/60 hover:text-white transition-colors relative group"
+              className={`text-sm font-medium transition-colors relative group ${
+                activeSection === link.href.replace('#', '') ? 'text-white' : 'text-white/60 hover:text-white'
+              }`}
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all group-hover:w-full" />
+              <span className={`absolute -bottom-1 left-0 h-[1px] bg-primary transition-all ${
+                activeSection === link.href.replace('#', '') ? 'w-full' : 'w-0 group-hover:w-full'
+              }`} />
             </motion.a>
           ))}
           
@@ -102,7 +136,9 @@ export const Navbar: React.FC = () => {
                   key={link.name} 
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-2xl font-bold hover:text-primary transition-colors"
+                  className={`text-2xl font-bold transition-colors ${
+                    activeSection === link.href.replace('#', '') ? 'text-primary' : 'hover:text-primary'
+                  }`}
                 >
                   {link.name}
                 </a>
